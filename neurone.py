@@ -9,7 +9,7 @@ Created on Sat Sep 22 16:08:17 2018
 from pylab import *
 import numpy as np
 import matplotlib.pyplot as plt
-import perceptron_source
+#import perceptron_source
 import activation_function
 
 class neurone:
@@ -101,6 +101,7 @@ dataset =[[1,2,1],
           [2.21,-1.16,1],
           [-4.97,6,1]]
 
+data = np.array(dataset)
 
 
 """w = [0.1,1,-1]
@@ -108,8 +109,8 @@ for row in dataset:
     x = perceptron.prediction(w,row)
     print("Expected=%d, Predicted=%d" % (row[-1], x))"""
     
-w = perceptron.train_weight(dataset,0.1,activation_function.Heavyside)
-print(w)
+#w = perceptron.train_weight(dataset,0.1,activation_function.Heavyside)
+#print(w)
 
 
 
