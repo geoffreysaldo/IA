@@ -14,7 +14,6 @@ import activation_function
 
 class neurone:
     """ class defining a neuron characterised by:
-    - Treshold of the transfert function
     - Number of input """
     
     def __init__(self,nbr_input):
