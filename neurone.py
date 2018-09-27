@@ -10,7 +10,7 @@ from pylab import *
 import numpy as np
 import matplotlib.pyplot as plt
 import perceptron_source
-
+import activation_function
 
 class neurone:
     """ class defining a neuron characterised by:
@@ -19,28 +19,27 @@ class neurone:
     
     def __init__(self,nbr_input):
         # constructor of the class
-        self.transfertFunction = ""
-        self.treshold = 0
         self.numberInput = nbr_input
 
     
 
-    def prediction(self,weight,row):
+    def prediction(self,weight,row,activation):
         output = weight[0]
         for i in range(len(row)-1):
             output += weight[i+1]*row[i]
-        if output > self.treshold :
+        return activation(output)
+        """if output > self.treshold :
             return 1
         else :
-            return 0
+            return 0"""
     
     
-    def train_weight(self,data_train,learning_rate):
+    def train_weight(self,data_train,learning_rate,activation):
         weights = [0.0 for i in range(len(data_train[0]))]
         for turn in range(200):
             sum_error =0
             for row in data_train:
-                error = row[-1] - self.prediction(weights,row)
+                error = row[-1] - self.prediction(weights,row,activation)
                 sum_error += error**2
                 weights[0] = weights[0] + learning_rate * error
                 for i in range(len(row)-1):
@@ -51,11 +50,6 @@ class neurone:
 
 
 perceptron = neurone(1)
-
-
-
-
-
 
 dataset =[[1,2,1],
           [2.5,-3,0],
@@ -115,7 +109,7 @@ for row in dataset:
     x = perceptron.prediction(w,row)
     print("Expected=%d, Predicted=%d" % (row[-1], x))"""
     
-w = perceptron.train_weight(dataset,0.1)
+w = perceptron.train_weight(dataset,0.1,activation_function.Heavyside)
 print(w)
 
 
